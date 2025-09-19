@@ -386,9 +386,11 @@
         
         // Button event listeners
         prevBtn.addEventListener('click', function() {
+            showStatus('Loading previous image...', 'info');
             fetch('/prev', { method: 'POST' })
                 .then(response => response.json())
                 .then(data => {
+                    console.log('Previous response:', data);
                     loadCurrentImage();
                 })
                 .catch(error => {
@@ -398,9 +400,11 @@
         });
         
         nextBtn.addEventListener('click', function() {
+            showStatus('Loading next image...', 'info');
             fetch('/next', { method: 'POST' })
                 .then(response => response.json())
                 .then(data => {
+                    console.log('Next response:', data);
                     loadCurrentImage();
                 })
                 .catch(error => {

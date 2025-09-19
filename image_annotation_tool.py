@@ -144,7 +144,11 @@ async def next_image():
     global index
     if index < len(images) - 1:
         index += 1
-    return JSONResponse({"index": index, "total": len(images)})
+    else:
+        print(f"Already at last image. Current index: {index}, Total images: {len(images)}")
+    
+    print(f"Next image - Index: {index}, Image: {images[index] if images else 'None'}")
+    return JSONResponse({"index": index, "total": len(images), "current": images[index] if images else None})
 
 @app.post("/prev")
 async def prev_image():
@@ -152,7 +156,11 @@ async def prev_image():
     global index
     if index > 0:
         index -= 1
-    return JSONResponse({"index": index, "total": len(images)})
+    else:
+        print(f"Already at first image. Current index: {index}")
+    
+    print(f"Previous image - Index: {index}, Image: {images[index] if images else 'None'}")
+    return JSONResponse({"index": index, "total": len(images), "current": images[index] if images else None})
 
 @app.get("/status")
 async def get_status():
